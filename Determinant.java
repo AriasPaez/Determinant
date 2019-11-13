@@ -1,24 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Determinant;
-
 /**
- *
- * @author Arias
+ * @author Cristian Arias
  */
 public class Determinant {
 
-    /**
-     * @param args the command line arguments
-     */
-//    double matriz_A[][] = {
-//        {4, 7, -2},
-//        {3, -5, 1},
-//        {-8, 6, 9}
-//    };
     double matriz_A[][] = {
         {2, 0, 3, 1},
         {0, 1, 4, 2},
@@ -39,21 +23,11 @@ public class Determinant {
         {2, 1, 9, 6},
         {3, 2, 4, 8}
     };
-//    double matriz_C[][] = {
-//        {3, 5, 2},
-//        {4, 2, 3},
-//        {-1, 2, 4}
-//    };
-
-//    double matriz_A[][] = {
-//        {4, 7},
-//        {3, -5}
-//    };
-//    
-    public double determinante2x2(double matriz[][]) {
+    //Function determinant 2x2. It is used by function determinant_recursive for get out of this function recursive
+    public double determinant2x2(double matriz[][]) {
         return (matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0]);
     }
-
+    //Show content of matriz nxn
     public void show_matriz_nxn(String text, double[][] matriz) {
         System.out.println(text);
         for (int j = 0; j < matriz.length; j++) {
@@ -63,8 +37,8 @@ public class Determinant {
             System.out.println("");
         }
     }
-
-    public double[][] extraer_sub_matriz(double matriz[][], int k) {
+    //Extract sub-matriz of matriz, it is necesary for the process basic of determinant
+    public double[][] extract_sub_matriz(double matriz[][], int k) {
         double sub_matriz[][] = new double[matriz.length - 1][matriz[0].length - 1];
         boolean column_k = false;
 
@@ -81,51 +55,39 @@ public class Determinant {
         }
         return sub_matriz;
     }
-
-    private double determinante(double matriz[][]) {
-
-        return determinante_recursivo(matriz, 0);
+    //Principal function of determinant
+    private double determinant(double matriz[][]) {
+        return determinant_recursive(matriz, 0);
     }
-
-    public double determinante_recursivo(double matriz[][], double determ) {
+    //Recursive function of determinant
+    public double determinant_recursive(double matriz[][], double determ) {
         if (matriz.length == 2) {
-            determ = determinante2x2(matriz);
-            return determ;
-            //System.out.println("det = " + determinante);
-
+            determ = determinant2x2(matriz);
+            return determ;            
         } else {
             double det_temp = 0;
             for (int i = 0; i < matriz[0].length; i++) {
-                /*se eleva a i, y no a "i+1" debido a que la matriz se recorre desde cero 
-                    y no desde uno como en la prueba de escritorio*/
-                double detMjk = determinante_recursivo(extraer_sub_matriz(matriz, i), determ);
+                double detMjk = determinant_recursive(extract_sub_matriz(matriz, i), determ);
                 det_temp += Math.pow(-1, i) * matriz[0][i] * detMjk;
-
             }
             return det_temp;
         }
-
     }
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        
         Determinant det = new Determinant();
         det.show_matriz_nxn("Matriz A:", det.matriz_A);
-        //System.out.println();
-        //det.show_matriz_nxn("sub_Matriz: ", det.extraer_sub_matriz(det.matriz_A, 2));
-        //System.out.println("");
-        System.out.println("det = " + det.determinante(det.matriz_A));
+        System.out.println("Determinant = " + det.determinant(det.matriz_A));
         System.out.println("-----------------");
         det.show_matriz_nxn("Matriz B:", det.matriz_B);
         System.out.println("");
-        System.out.println("det = " + det.determinante(det.matriz_B));
+        System.out.println("Determinant = " + det.determinant(det.matriz_B));
         System.out.println("-----------------");
         det.show_matriz_nxn("Matriz C:", det.matriz_C);
         System.out.println("");
-        System.out.println("det = " + det.determinante(det.matriz_C));
+        System.out.println("Determinant = " + det.determinant(det.matriz_C));
         System.out.println("-----------------");
-        //determinante.show_matriz_nxn("Matriz A", determinante.matriz_A);
-        //determinante.show_matriz_nxn("Sub_Matriz", determinante.extraer_sub_matriz(determinante.matriz_A, 0));
 
     }
 
