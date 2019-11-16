@@ -10,19 +10,7 @@ public class Determinant {
         {1, 2, 3, 0}
     };
 
-    double matriz_B[][] = {
-        {-6, 8, -5, 0, 0},
-        {0, 0, 0, 0, -3},
-        {-5, 0, -5, -6, 0},
-        {0, -8, 0, 0, 2},
-        {0, -7, 0, 2, 1}
-    };
-    double matriz_C[][] = {
-        {1, 3, 5, 2},
-        {0, -1, 3, 4},
-        {2, 1, 9, 6},
-        {3, 2, 4, 8}
-    };
+
     //Function determinant 2x2. It is used by function determinant_recursive for get out of this function recursive
     public double determinant2x2(double matriz[][]) {
         return (matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0]);
@@ -80,14 +68,7 @@ public class Determinant {
         det.show_matriz_nxn("Matriz A:", det.matriz_A);
         System.out.println("Determinant = " + det.determinant(det.matriz_A));
         System.out.println("-----------------");
-        det.show_matriz_nxn("Matriz B:", det.matriz_B);
-        System.out.println("");
-        System.out.println("Determinant = " + det.determinant(det.matriz_B));
-        System.out.println("-----------------");
-        det.show_matriz_nxn("Matriz C:", det.matriz_C);
-        System.out.println("");
-        System.out.println("Determinant = " + det.determinant(det.matriz_C));
-        System.out.println("-----------------");
+
 
     }
 
